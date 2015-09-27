@@ -1,0 +1,151 @@
+
+.media-square {
+    position: relative;
+    display: inline-block;
+    float: left;
+    border: 1px solid #AAA;
+    -webkit-transition: background 1s;
+    transition: background 1s;
+    width:100%;
+    min-height: 100px;
+    min-width: 100px;
+}
+
+.defaultDirBg {
+    background: url("../../images/Pineapple.png");
+    background-size: 100% ;
+}
+
+.defaultDir .media-infos{
+    opacity: 1 !important;
+}
+
+
+
+
+.media-square img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100%;
+    min-height: 85%;
+}
+
+img {
+    vertical-align: middle;
+}
+
+img {
+    border: 0;
+}
+
+.media-square .media-infos {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 56px;
+    font-size: 20px;
+    color: #DDD;
+    text-align: center;
+    text-shadow: 1px 1px #333;
+    background-color: #000;
+    background-color: rgba(0,0,0,0.7);
+    -webkit-transition: height .25s;
+    transition: height .25s;
+    min-width: 100px;
+}
+
+.media-square .media-infos .media-more-infos {
+    height: 0;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.media-square .media-infos .media-more-infos .center {
+    position: absolute;
+    top: 45%;
+    display: none;
+    width: 100%;
+}
+.media-square a {
+    color: white;
+}
+
+.media-square .caption a:last-child:not(:first-child) {
+    display: block;
+    font-size: 15px;
+}
+
+.slideRight {
+    padding-left: 400px !important;
+}
+
+
+
+@media screen and (max-width: 768px) and (min-width: 0px) {
+    .media-square .dummy {
+        padding-top: 0!important;
+    }
+
+    .media-square .media-infos {
+        position: relative!important;
+    }
+    .media-square img {
+        display: none;
+    }
+
+    .defaultDirBg {
+        background: none;
+    }
+
+}
+
+@media screen and (max-width: 1000px) and (min-width: 768px) {
+    .media-square {
+        width: 33%;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1000px)  {
+    .media-square {
+        width: 33%;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1200px)  {
+    .media-square {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .media-square {
+        width: 20%;
+    }
+}
+
+.media-square .dummy {
+    padding-top: 100%;
+}
+
+.media-square .media-infos {
+    position: absolute;
+}
+
+
+
+.blockHover {
+    display: none!important;
+}
+
+.dirPlaylist>table>tbody>tr:hover>.noneHover {
+    display:none !important;
+}
+
+.dirPlaylist>table>tbody>tr:hover>.blockHover {
+    display: table-cell!important;
+}

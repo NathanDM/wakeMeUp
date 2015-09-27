@@ -1,0 +1,36 @@
+# gradle, maven #
+.gradle/
+target/
+# intellij, eclipse #
+.idea/
+*.iml
+*.ipr
+*.iws
+.settings/
+.metadata
+.project
+.classpath
+# python, python compiled #
+*.py
+*.pyc
+# JRebel #
+rebel.xml
+front-web/overlays/
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+*.mp3
+ 
+pids
+logs
+results
+ 
+node_modules
+npm-debug.log

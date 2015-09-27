@@ -1,0 +1,21 @@
+.connected {
+    color:green;
+}
+
+.wrapped {
+    transition: width 2s;
+}
+
+#page-wrapper {
+    padding-left: 0px;
+    transition: padding-left 2s;
+
+}
+
+.orangeHover:hover {
+    color: #e59121;
+}
+@media tv, (device-aspect-ratio: 16/9), (device-aspect-ratio: 16/10) {
+    .body {display:none}
+}
+
