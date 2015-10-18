@@ -17,7 +17,7 @@ WMU.controller('DirectoryViewCtrl', function ($scope, $rootScope, $state, $state
         $scope.isPreview = true;
 
         //Init Dir
-        Directory.getContent("./public/musique").then(function (data) {
+        Directory.getContent("./public/musique/").then(function (data) {
             updateDir(data);
             $scope.rootDir = data;
         });

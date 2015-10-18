@@ -3,3 +3,14 @@
  */
 
 "use strict";
+
+var adminDao = {
+
+    init:function () {
+
+    },
+
+    findFile: function () {
+
+    }
+}

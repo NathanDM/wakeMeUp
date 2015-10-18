@@ -31,6 +31,8 @@ lib-cov
 pids
 logs
 results
- 
+data
+public/musique
+
 node_modules
 npm-debug.log

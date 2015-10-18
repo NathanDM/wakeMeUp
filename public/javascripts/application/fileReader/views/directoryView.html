@@ -14,7 +14,7 @@
             <!--</div>-->
         </div>
 
-        <div class="media-square" ng-if="dir.dir && dir.files.length != 0" ng-repeat="dir in directories" ng-click="onClickDir(dir.src)">
+        <div class="media-square" ng-if="dir.dir" ng-repeat="dir in directories" ng-click="onClickDir(dir.src)">
             <!--<div class="media-square" ng-class="{defaultDirBg : !dir.imgUrl}" ng-if="dir.dir" ng-repeat="dir in directories" ng-click="onClickDir(dir.src)">-->
             <div class="dummy"></div>
             <img ng-if="dir.imgUrl" ng-src="{{dir.imgUrl}}" >

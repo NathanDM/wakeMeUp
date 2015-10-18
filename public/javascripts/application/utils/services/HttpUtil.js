@@ -56,7 +56,7 @@ WMU.service('HttpUtil', function ($http) {
         self.info.requestCpt ++;
         //We return the promise
         return $http({
-            url: uri + "?",
+            url: uri + "",
             dataType: "json",
             data: method == "GET" ? "" : payload,
             method: method,

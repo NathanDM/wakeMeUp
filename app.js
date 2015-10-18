@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 //WebService
 var music = require('./routes/ws/music');
 var adminWS = require('./routes/ws/adminWS');
+var fileWS = require('./routes/ws/fileWS');
 //Controller
 var userCtrl = require('./controllers/userController');
 
@@ -43,6 +44,7 @@ app.use('/', routes);
 //WebServices
 app.use('/ws', music);
 app.use('/admin', adminWS);
+app.use('/file', fileWS);
 
 //WebSocket
 io.on('connection', function (socket) {

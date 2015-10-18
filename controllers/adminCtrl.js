@@ -1,110 +1,114 @@
-var mm = require('musicmetadata');
-fs = require('fs');
+var mm = require('musicmetadata'),
+    fs = require('fs'),
+    MongoClient = require('mongodb').MongoClient,
+    Q = require('q'),
+    _ = require('lodash');
+var Db = require('tingodb')().Db,
+    assert = require('assert');
 
-
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
-
-// Connection URL
-var url = 'mongodb://127.0.0.1:3001/meteor';
-var db;
-MongoClient.connect(url, function (err, database) {
-    db = database;
-})
+var db = new Db('./data', {});
+var collection = db.collection('documents');
 
 var endsWith = function (element, suffix) {
     return element.indexOf(suffix, element.length - suffix.length) !== -1;
 };
 
-
-var parent;
 // Keep track of which names are used so that there are no duplicates
 var adminCtrl = {
+    init: function () {
+        var deferred = Q.defer(),
+            file = "musique",
+            parent = "./public/";
 
-    walk: function (dir, done) {
-        var directory = {};
-        var name = dir.split("/");
+        adminCtrl.insertFileRecursively(parent, file).then(function (result) {
+            deferred.resolve(result);
+        });
+        return deferred.promise;
+    },
+    insertDirRecursively: function (dirModel) {
+        var deferred = Q.defer();
+        var promList = [];
+        dirModel.src += "/"
+        fs.readdir(dirModel.src, function (err, list) {
+            if (err) {
+                console.log(err.mess, err);
+                deferred.resolve(dirModel);
+            } else {
 
-        directory.name = name[name.length - 1];
-        name.pop();
-        if (name.length <= 1) {
-            directory.parent = name[0];
-        } else {
-            directory.parent = name.join('/');
-        }
+                //Explore files
+                _.each(list, function (file) {
+                    var fileDeferred = Q.defer();
+                    //Store the promess
+                    promList.push(fileDeferred.promise);
 
-        directory.src = dir;
-        directory.files = [];
-        directory.dir = true;
-
-        fs.readdir(dir, function (err, list) {
-            if (err) return done(err);
-            var i = 0;
-            (function next() {
-                var file = list[i++];
-                if (!file) return done(null, directory);
-                var fileName = file;
-                file = dir + '/' + file;
-
-                fs.stat(file, function (err, stat) {
-                    if (stat && stat.isDirectory()) {
-                        adminCtrl.walk(file, function (err, res) {
-                            directory.files.push(res);
-                            var collection = db.collection('documents');
-                            // Insert some documents
-                            collection.insert([res]);
-                            next();
-                        });
-//                        next();
-                    } else {
-                        if (endsWith(fileName, "jpg") || endsWith(fileName, "png")) {
-                            directory.imgUrl = './' + file.split("./public/").join('');
-                        } else if (endsWith(fileName, "mp3") || endsWith(fileName, "m4a")) {
-                            directory.containSong = true;
-
-                            var retval = {};
-                            retval.dir = false;
-                            retval.name = fileName;
-                            retval.src = './' + file.split("./public/").join('');
-                            retval.type = 'audio/mp3';
-                            retval.title = fileName.split(".mp3").join('').split('_').join(' ');
-
-                            var name = file.split("/");
-                            name.pop();
-                            retval.parentUrl = name.join('/');
-                            name = name.join('/').split("/");
-                            retval.parentLabel = name.pop();
-                            var collection = db.collection('documents');
-                            // Insert some documents
-                            collection.insert([retval]);
-                            directory.files.push(retval);
-                        }
-                        next();
-                    }
+                    //Read the file
+                    adminCtrl.readFile(dirModel.src, file).then(function (model) {
+                        fileDeferred.resolve(model);
+                    });
                 });
 
-            })();
-            var collection = db.collection('documents');
-            collection.insert([directory]);
+                //repo is empty
+                if (promList.length === 0) {
+                    deferred.resolve(dirModel);
+                } else {
+                    Q.all(promList).then(function () {
+                        deferred.resolve(dirModel);
+                    });
+                }
+            }
+        });
 
-        })
+        return deferred.promise;
+    },
+    insertFileRecursively: function (dirPath, file) {
+        var deferred = Q.defer();
+        var retval = {
+            name: file,
+            type: null,
+            src: dirPath + file,
+            parent: dirPath
+        };
 
+        fs.stat(retval.src, function (err, stat) {
+            if (err) {
+                console.log(err.mess, err);
+                deferred.resolve(err);
+                return;
+            }
+            if (stat && stat.isDirectory()) {
+                adminCtrl.insertDirRecursively(retval).then(function (res) {
+                    res.type = "DIR";
+                    collection.insert(res);
+                    deferred.resolve(res);
+                });
+            } else {
+                if (endsWith(retval.src, "jpg") || endsWith(retval.src, "png")) {
+                    retval.type = "IMG";
+                } else if (endsWith(retval.src, "mp3") || endsWith(retval.src, "m4a")) {
+                    retval.type = "SONG";
+                }
+                collection.insert(retval);
+                deferred.resolve(retval);
+            }
+
+        });
+        return deferred.promise;
     },
     remove: function (dir, callback) {
-        var collection = db.collection('documents');
-        collection.remove({}, function (err, res) {
-            if (err) return done(err);
-
+        collection.deleteMany({}, function (err, res) {
+            if (err) return err;
             callback(undefined, res);
         });
     },
-
-
-    getAll :function (dir, callback) {
-        var collection = db.collection('documents');
-        // Find some documents
+    readAll: function (callback) {
         collection.find({}).toArray(function (err, docs) {
-            callback(err, {mess: docs});
+            callback(docs);
+        });
+    },
+
+    readDir: function(dirName, callback) {
+        collection.find({parent: dirName}).toArray(function (err, docs) {
+            callback(docs);
         });
     }
 };

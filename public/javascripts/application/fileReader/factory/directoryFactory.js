@@ -47,7 +47,7 @@ WMU.factory('Directory', function(HttpUtil){
 //     * @returns {Promise} The promise after applying the data on the properties' object
 //     */
 //    var getContent = function (dir) {
-//        var urlToRequest = "admin/get" + "?file=" + dir;
+//        var urlToRequest = "file/getWithChildren" + "?file=" + dir;
 //
 //        return HttpUtil.request('GET', urlToRequest, {});
 //    }
@@ -58,4 +58,4 @@ WMU.factory('Directory', function(HttpUtil){
 //        getContent: getContent
 //    };
 //});
-
+//
