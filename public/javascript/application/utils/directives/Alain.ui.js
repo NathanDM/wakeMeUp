@@ -9,7 +9,7 @@ WMU.directive('alain', function() {
         link: function(scope, element, attrs, controllers) {
 
         },
-        templateUrl: 'javascripts/application/utils/directives/views/Alain.html'
+        templateUrl: 'javascript/application/utils/directives/views/Alain.html'
     };
 });
 

@@ -9,7 +9,7 @@ WMU.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 "masterView": {
                     templateUrl: function () {
-                        return "javascripts/application/master/views/masterView.html";
+                        return "javascript/application/master/views/masterView.html";
                     },
                     "controller": "MasterCtrl"
                 }
@@ -20,25 +20,25 @@ WMU.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 "navView": {
                     templateUrl: function () {
-                        return "javascripts/application/nav/views/navView.html";
+                        return "javascript/application/nav/views/navView.html";
                     },
                     controller: "NavViewCtrl"
                 },
                 "playerView" : {
                     templateUrl: function() {
-                        return "javascripts/application/player/views/player.html";
+                        return "javascript/application/player/views/player.html";
                     },
                     "controller": "PlayerViewCtrl"
                 },
                 "directoryView": {
                     templateUrl: function () {
-                        return "javascripts/application/fileReader/views/directoryView.html";
+                        return "javascript/application/fileReader/views/directoryView.html";
                     },
                     controller: "DirectoryViewCtrl"
                 },
                 "musicPreview": {
                     templateUrl: function () {
-                        return "javascripts/application/fileReader/views/musicPlayerPreview.html";
+                        return "javascript/application/fileReader/views/musicPlayerPreview.html";
                     },
                     controller: "musicPreviewCtrl"
                 }

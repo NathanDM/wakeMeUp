@@ -12,7 +12,7 @@ $ npm install
 ## Start Server
 
 ```sh
-$ node app
+$ npm start
 ```
 
 ## Add Song
