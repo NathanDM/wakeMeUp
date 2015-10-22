@@ -8,7 +8,7 @@
 
 var MongoClient = require('mongodb').MongoClient
     , assert = require('assert'),
-    adminCtrl = require('../controllers/adminCtrl');
+    adminCtrl = require('./adminCtrl');
 
 
 // Connection URL

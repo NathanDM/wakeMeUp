@@ -6,13 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 //Front
-var routes = require('./routes/index');
+var routes = require('./server/routes/index');
 //WebService
-var music = require('./routes/ws/music');
-var adminWS = require('./routes/ws/adminWS');
-var fileWS = require('./routes/ws/fileWS');
+var music = require('./server/routes/ws/music');
+var adminWS = require('./server/routes/ws/adminWS');
+var fileWS = require('./server/routes/ws/fileWS');
 //Controller
-var userCtrl = require('./controllers/userController');
+var userCtrl = require('./server/controllers/userController');
 
 //view engine
 var app = express();
@@ -27,7 +27,7 @@ var io = require('socket.io')(server);
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'jade');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
