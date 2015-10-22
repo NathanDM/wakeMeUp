@@ -1,11 +1,19 @@
+(function () {
+    'use strict';
 
-WMU.service('Constants', function () {
-    var MODE = {
-        remote: "remote",
-        apps: "apps"
-    };
 
-    return {
-        MODE:MODE
-    };
-});
+    angular
+        .module('wakemeup')
+        .service('Constants', Constants);
+
+    function Constants() {
+        var MODE = {
+            remote: "remote",
+            apps: "apps"
+        };
+
+        return {
+            MODE: MODE
+        };
+    }
+})();

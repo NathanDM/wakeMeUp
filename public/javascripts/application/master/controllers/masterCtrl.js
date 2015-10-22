@@ -1,8 +1,19 @@
-WMU.controller('MasterCtrl', function ($scope, $rootScope, $state, $stateParams, Socket) {
+(function () {
+    'use strict';
 
-    //region Init
-    init(this);
 
-    function init(self) {
+    angular
+        .module('wakemeup')
+        .controller('MasterCtrl', MasterCtrl);
+
+    MasterCtrl.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'Socket'];
+
+    function MasterCtrl($scope, $rootScope, $state, $stateParams, Socket) {
+
+        //region Init
+        init(this);
+
+        function init(self) {
+        }
     }
-});
+})();

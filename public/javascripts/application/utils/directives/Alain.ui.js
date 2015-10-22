@@ -1,15 +1,23 @@
-WMU.directive('alain', function() {
-    return {
-        restrict: 'E',
-        transclude: true,
-        scope: {
-            svgWidth: '@',
-            svgHeight: '@'
-        },
-        link: function(scope, element, attrs, controllers) {
+(function () {
+    'use strict';
 
-        },
-        templateUrl: 'javascripts/application/utils/directives/views/Alain.html'
-    };
-});
+    angular
+        .module('wakemeup')
+        .directive('alain', alain);
+
+    function alain() {
+        return {
+            restrict: 'E',
+            transclude: true,
+            scope: {
+                svgWidth: '@',
+                svgHeight: '@'
+            },
+            link: function (scope, element, attrs, controllers) {
+
+            },
+            templateUrl: 'javascripts/application/utils/directives/views/Alain.html'
+        };
+    }
+})();
 

@@ -5,29 +5,35 @@
  * @module spaceo
  * @class Shelf
  */
+(function (){
+    'use strict';
 
-WMU.factory('Directory', function(HttpUtil){
+angular
+    .module('wakemeup')
+    .factory('Directory', Directory);
 
-    /**
-     * Request the shelf web service to get the shelves list corresponding to the given param.
-     *
-     * @method requestShelf
-     * @param {Object} The params of the request
-     * @returns {Promise} The promise after applying the data on the properties' object
-     */
-    var getContent = function (dir) {
-        var urlToRequest = "ws/music/";
-        var param = {dir: dir};
+    function Directory(HttpUtil) {
 
-        return HttpUtil.request('POST', urlToRequest, param);
+        /**
+         * Request the shelf web service to get the shelves list corresponding to the given param.
+         *
+         * @method requestShelf
+         * @param {Object} The params of the request
+         * @returns {Promise} The promise after applying the data on the properties' object
+         */
+        var getContent = function (dir) {
+            var urlToRequest = "ws/music/";
+            var param = {dir: dir};
+
+            return HttpUtil.request('POST', urlToRequest, param);
+        }
+
+
+        return {
+            getContent: getContent
+        };
     }
-
-
-
-    return {
-        getContent: getContent
-    };
-});
+})();
 
 ///**
 // * Shelf Service.
