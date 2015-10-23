@@ -44,7 +44,7 @@
          * @method _error
          * @param {Object} data the detail error object
          */
-        _error = function (data) {
+        var _error = function (data) {
             self.info.requestCpt--;
 
             console.log(data);
