@@ -3,7 +3,17 @@
 
     angular
         .module('wakemeup')
-        .controller('PlayerViewCtrl', PlayerViewCtrl);
+        .directive('myPlayer', myPlayer);
+
+    function myPlayer() {
+        var directive = {
+            templateUrl: 'javascript/application/player/views/player.html',
+            restrict: 'EA',
+            controller: PlayerViewCtrl
+        };
+        return directive;
+
+    }
 
     PlayerViewCtrl.$inject = ['$scope', '$rootScope', '$state', 'EventNames', 'Player', 'Socket'];
 

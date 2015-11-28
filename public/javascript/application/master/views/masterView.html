@@ -1,12 +1,14 @@
-<div id="wrapper">
+<!-- Navigation -->
+<header id="header" ui-view="navView" class="media" role="navigation">
+</header>
+<div class="clearfix"></div>
+<section id="main" class="" role="main">
+    <aside ui-view="sideNavView" id="sidebar"></aside>
 
-    <!-- Navigation -->
-    <nav ui-view="navView" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    </nav>
-    <div ui-view="playerView"></div>
+    <section id="content" class="container" ui-view="directoryView" ></section>
+</section>
 
-    <!-- /#page-wrapper -->
-    <div class="wrapped" ui-view="directoryView" ></div>
+<!--<div ui-view="playerView" class="player"></div>-->
 
-</div>
+<!-- /#page-wrapper -->
 

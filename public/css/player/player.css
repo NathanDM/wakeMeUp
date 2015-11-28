@@ -1,0 +1,261 @@
+.player{
+    z-index: 100000000000000000000000000000000000000000000000000000;
+}
+
+.side-player {
+    position: fixed;
+    color: #ffffff;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0px;
+    /*background-color: rgba(255,255,255,0.3) !important;*/
+}
+.progress {
+    height: 6px !important;
+    margin-bottom: 10px !important;
+    background-color: rgba(255,255,255,0.4) !important;
+    border-radius: 0px !important;
+}
+.progress-bar{
+    background-color: #e59121 !important;
+    /*background: linear-gradient(to bottom, #ba6552 0%, #d79765 100%);*/
+}
+.control-wrapper {
+    width: 75%;
+    margin: auto;
+    margin-bottom: 10px;
+
+}
+
+.info-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.title-wrapper {
+    padding: 25px 15px 15px 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.album {
+    font-size: 0.9em;
+    color: silver
+}
+
+.timer {
+    font-weight: bold;
+    font-size: 0.7em;
+    margin: 5px;
+}
+
+.btn{
+    width: 31%;
+}
+
+.playlist-ico{
+    color : white;
+    position: relative;
+    float:  right;
+    z-index: 2;
+    margin: 5px 10px 10px 10px;
+    transition: transform 2s;
+
+}
+.playlist-ico:hover {
+    color:#eee;
+}
+
+.playlist-ico-open {
+    transform: rotate(90deg);
+}
+
+.playlistWrapper {
+    width: 0px;
+    height: calc(100% - 51px);
+    position: fixed;
+    left: 233px;
+    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width 2s;
+    background: #4E4E4E;
+    color: white;
+}
+
+.playlistWrapper .table>thead>tr>th {
+    padding: 2px  0px 5px 0px;
+    border-bottom: 2px solid #e59121 !important;
+}
+
+.isPlaylistVisible {
+    width: 400px;
+}
+
+.playlistWrapper .table>tbody>tr.active>td{
+    background: #636363;
+}
+.playlistWrapper .table-hover>tbody>tr:hover>td,
+.playlistWrapper .table-hover>tbody>tr:hover>th {
+    background: #636363;
+
+}
+
+
+.showHover {
+    opacity: 0;
+}
+.showHover:hover {
+    opacity: 1;
+}
+
+.hideHover {
+    opacity: 1;
+}
+
+.hideHover:hover {
+    opacity: 0;
+}
+
+
+.playlistWrapper .table>thead>tr:hover>th .showHover,
+.playlistWrapper .table-hover>tbody>tr:hover>td .showHover,
+.playlistWrapper .table-hover>tbody>tr:hover>th .showHover {
+    opacity: 1;
+}
+
+
+.playlistWrapper tbody{
+    /*display: block;*/
+    transition: height 1s ease-out;
+    overflow: hidden;
+    padding-bottom: 45px;
+}
+
+.playlistWrapper .closed>tbody {
+    height: 0;
+    opacity: 0;
+    display: none;
+    padding-bottom: 0px !important;
+}
+
+
+
+.playlistWrapper .table>tbody>tr>td {
+    border-bottom: 1px solid #333;
+    border-top: 0;
+    font-weight: bold;
+    padding: 7px 0px 0px 12px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.playlistWrapper .table {
+   /*// margin-bottom: -20px;*/
+}
+
+.blockPlaylist {
+    width: 400px;
+
+}
+
+/*
+Input for playlist
+*/
+
+#input input{
+    position: relative;
+    width: 100%;
+    color: white;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+#input .border-line{
+    width:100%;
+    border:3px solid #555555;
+    border-top:none;
+    height:18%;
+    position:absolute;
+    bottom:0px;
+    box-shadow:0px 2px 3px 0px rgba(0,0,0,.25);
+}
+/*
+    End input for playlist
+*/
+
+@media screen and (min-width: 1500px) {
+    .side-player {
+        position: fixed;
+        bottom: 0px;
+        left: 233px;
+        width: 233px;
+        margin-left: -233px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #222;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1200px) {
+    .side-player {
+        position: fixed;
+        bottom: 0px;
+        left: 233px;
+        width: 233px;
+        margin-left: -233px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #222;
+    }
+}
+@media screen and (max-width: 1200px) and (min-width: 1000px) {
+    .side-player {
+        position: fixed;
+        bottom: 0px;
+        left: 233px;
+        width: 233px;
+        margin-left: -233px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #222;
+    }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 768px) {
+    .side-player {
+        position: fixed;
+        bottom: 0px;
+        left: 233px;
+        width: 233px;
+        margin-left: -233px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #222;
+    }
+
+    .isPlaylistVisible {
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 0px) {
+    .side-player {
+        z-index: 10;
+        background-color: #222 !important;
+    }
+    .info-wrapper {
+        display: none;
+    }
+    .playlistWrapper{
+        left: 0;
+    }
+}

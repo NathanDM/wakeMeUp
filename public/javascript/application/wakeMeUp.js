@@ -20,9 +20,16 @@ WMU.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 "navView": {
                     templateUrl: function () {
-                        return "javascript/application/nav/views/navView.html";
+                        return "javascript/application/nav/views/nav.html";
+                        //return "javascript/application/nav/views/navView.html";
                     },
                     controller: "NavViewCtrl"
+                },
+                "sideNavView": {
+                    templateUrl: function () {
+                        return "javascript/application/sideNav/sideNav.html";
+                    },
+                    controller: "SideNavController"
                 },
                 "playerView" : {
                     templateUrl: function() {

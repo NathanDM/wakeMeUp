@@ -18,6 +18,7 @@
             $scope.users = [];
             $scope.quantity = 5;
 
+
             $scope.isBroadcaster = false;
             $scope.isListener = true;
             $scope.togglePreview = togglePreview;
@@ -60,7 +61,7 @@
         }
 
         function togglePreview() {
-            ;
+
         }
     }
 })();

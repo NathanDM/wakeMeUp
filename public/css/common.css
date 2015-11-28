@@ -19,3 +19,18 @@
     .body {display:none}
 }
 
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+
+.inline-block {
+    display: inline-block;
+}
+
+.content-wrapper{
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+}

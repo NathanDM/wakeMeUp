@@ -11,6 +11,7 @@ var routes = require('./server/routes/index');
 var music = require('./server/routes/ws/music');
 var adminWS = require('./server/routes/ws/adminWS');
 var fileWS = require('./server/routes/ws/fileWS');
+
 //Controller
 var userCtrl = require('./server/controllers/userController');
 
@@ -18,13 +19,12 @@ var userCtrl = require('./server/controllers/userController');
 var app = express();
 
 //server
-var server = app.listen(3010, function() {
+var server = app.listen(80, function() {
     console.log('Express server listening on port ' + server.address().port);
 });
 
 //Web SocketIO
 var io = require('socket.io')(server);
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public'));
