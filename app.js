@@ -53,8 +53,8 @@ app.use('/',index);
 
 // production error handler
 // no stacktraces leaked to user
-app.use(errorPage);
-app.use(notFoundPage);
+//app.use(errorPage);
+//app.use(notFoundPage);
 
 
 //Web SocketIO

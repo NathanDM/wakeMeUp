@@ -6,7 +6,7 @@
 .superbox-list {
     display: inline-block;
     padding: 6px;
-    
+    min-height: 150px;
     
 }
 

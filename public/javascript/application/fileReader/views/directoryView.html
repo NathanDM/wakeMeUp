@@ -11,16 +11,16 @@
     <!--</div>-->
     <div class="block-area">
         <div class="photo-gallery tile clearfix">
-            <div class="superbox-list" ng-if="dir.dir" ng-repeat="dir in directories | filter:$parent.searchSong" ng-click="onClickDir(dir.src)">
+            <div class="superbox-list" ng-if="dire.dir" ng-repeat="dire in directories" ng-click="onClickDir(dire.src)">
                 <div class="dummy"></div>
-                <img ng-if="dir.imgUrl" ng-src="{{dir.imgUrl}}" >
-                <alain ng-if="!dir.imgUrl" svg-width="100%" svg-height="100%" style="position:absolute; top:0; bottom: 0; left:0; right:0" ></alain>
+                <img ng-if="dire.imgUrl" ng-src="{{dire.imgUrl}}" >
+                <alain ng-if="!dire.imgUrl" svg-width="100%" svg-height="100%" style="top:0; bottom: 0; left:0; right:0" ></alain>
                 <div class="superbox-info">
                     <h4 class="m-t-20" data-rel="history">
-                        {{dir.name}}
+                        {{dire.name}}
                     </h4>
-                    <p class="m-b-20" ng-if="dir.containSong">{{dir.files.length}} Songs</p>
-                    <p class="m-b-20" ng-if="!dir.containSong">{{dir.files.length}} Albums</p>
+                    <p class="m-b-20" ng-if="dir.containSong">{{dire.files.length}} Songs</p>
+                    <p class="m-b-20" ng-if="!dir.containSong">{{dire.files.length}} Albums</p>
                 </div>
             </div>
 
