@@ -1,4 +1,4 @@
-var dirController = require('./../../controllers/dirController');
+var dirController = require('./../../ws/controllers/dirController');
 var express = require('express');
 
 

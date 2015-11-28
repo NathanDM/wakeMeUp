@@ -1,4 +1,4 @@
-var adminCtrl = require('./../../controllers/adminCtrl.js');
+var adminCtrl = require('./../../admin/controllers/adminCtrl.js');
 var express = require('express');
 var router = express.Router();
 

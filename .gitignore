@@ -33,6 +33,7 @@ logs
 results
 data/*
 public/musique/*
+archives
 
 node_modules
 npm-debug.log

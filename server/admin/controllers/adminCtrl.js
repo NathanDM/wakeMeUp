@@ -1,13 +1,11 @@
 var mm = require('musicmetadata'),
     fs = require('fs'),
-    MongoClient = require('mongodb').MongoClient,
     Q = require('q'),
-    _ = require('lodash');
-var Db = require('tingodb')().Db,
-    assert = require('assert');
+    _ = require('lodash'),
+    Db = require('tingodb')().Db;
 
-var db = new Db('./data', {});
-var collection = db.collection('documents');
+var wmuDb = new Db('./data', {});
+var collection = wmuDb.collection('documents');
 
 var endsWith = function (element, suffix) {
     return element.indexOf(suffix, element.length - suffix.length) !== -1;
@@ -42,7 +40,7 @@ var adminCtrl = {
                     promList.push(fileDeferred.promise);
 
                     //Read the file
-                    adminCtrl.readFile(dirModel.src, file).then(function (model) {
+                    adminCtrl.insertFileRecursively(dirModel.src, file).then(function (model) {
                         fileDeferred.resolve(model);
                     });
                 });
@@ -95,7 +93,7 @@ var adminCtrl = {
         return deferred.promise;
     },
     remove: function (dir, callback) {
-        collection.deleteMany({}, function (err, res) {
+        collection.remove({}, function (err, res) {
             if (err) return err;
             callback(undefined, res);
         });
@@ -106,7 +104,7 @@ var adminCtrl = {
         });
     },
 
-    readDir: function(dirName, callback) {
+    readDir: function (dirName, callback) {
         collection.find({parent: dirName}).toArray(function (err, docs) {
             callback(docs);
         });
