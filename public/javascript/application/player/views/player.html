@@ -1,103 +1,119 @@
-
 <audio class="side-player" media-player="mediaPlayer" playlist="audioPlaylist">
 </audio>
 
-<div class="side-player">
-    <a class="playlist-ico" ng-class="{'playlist-ico-open' : isPlaylistVisible}" ng-click="togglePlaylistPanel()"><i class="fa fa-lg fa-bars"></i></a>
-    <div class="info-wrapper" ng-show="mediaPlayer.currentTime">
+
+<div class="side-player" ng-show="mediaPlayer.currentTime">
+    <img ng-src="{{imgUrl}}"
+         style="position: absolute;
+    width: 100%;
+    z-index: -1;
+    -webkit-filter: blur(1px);"/>
+    <!--<a class="playlist-ico" ng-class="{'playlist-ico-open' : isPlaylistVisible}" ng-click="togglePlaylistPanel()"><i class="fa fa-lg fa-bars"></i></a>-->
+    <div class="info-wrapper">
+        <a class="chromecast-ico" ng-show="castAvailable">
+            <img id="castme" width="20" ng-click="launchApp()"
+                 src="../../../../images/Chromecast_cast_button_icon.svg.png"/>
+        </a>
+
         <div class="title-wrapper">
             {{title}} <br/>
             <span class="album">{{parentDirLabel}}</span>
         </div>
-        <span class="ng-binding timer" >{{mediaPlayer.formatTime}}</span>
-        <span class="ng-binding timer" style="right:0; position:absolute">{{mediaPlayer.formatDuration}}</span>
-    </div>
-    <div class="progress" ng-click="mediaPlayer.seek(mediaPlayer.duration * seekPercentage($event))" style="width: 100%; height:auto">
-        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{ width: mediaPlayer.currentTime*100/mediaPlayer.duration + '%' }"></div>
-    </div>
+        <div class="remote-wrapper">
+            <span class="ng-binding timer">{{mediaPlayer.formatTime}}</span>
+            <span class="ng-binding timer" style="right:0; position:absolute">{{mediaPlayer.formatDuration}}</span>
 
-    <div class="control-wrapper">
-        <div class="btn" ng-click="mediaPlayer.prev()">
-            <i class="fa fa-backward fa-lg "></i>
-        </div>
+            <div class="progress" ng-click="mediaPlayer.seek(mediaPlayer.duration * seekPercentage($event))"
+                 style="width: 100%; height:auto">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                     ng-style="{ width: mediaPlayer.currentTime*100/mediaPlayer.duration + '%' }"></div>
+            </div>
+            <div class="control-wrapper">
+                <div class="btn" ng-click="mediaPlayer.prev()">
+                    <i class="fa fa-backward fa-lg "></i>
+                </div>
 
-        <div class="btn" ng-click="mediaPlayer.playPause()">
-            <i class="fa fa-2x fa-play" ng-class="{ 'fa-pause': mediaPlayer.playing, 'fa-play': !mediaPlayer.playing }"></i>
-        </div>
+                <div class="btn" ng-click="mediaPlayer.playPause()">
+                    <i class="fa fa-2x fa-play"
+                       ng-class="{ 'fa-pause': mediaPlayer.playing, 'fa-play': !mediaPlayer.playing }"></i>
+                </div>
 
-        <div class="btn" ng-click="mediaPlayer.next()">
-            <i class="fa fa-lg fa-forward"></i>
-        </div>
-    </div>
-
-</div>
-
-<div class="playlistWrapper" ng-class="{ 'isPlaylistVisible' : isPlaylistVisible}">
-    <div class="blockPlaylist" >
-        <div class="container-fluid">
-            <div class="table-responsive" >
-                <table class="table table-hover" ng-class="{closed: !audioPlaylistEnriched.isVisible}" >
-                    <thead>
-                    <tr ng-click="togglePlaylist(audioPlaylistEnriched)">
-                        <th class="col-lg-offset-1 col-lg-12">{{audioPlaylistEnriched.name}} (current Playlist)</th>
-
-                        <th class="col-lg-1" style="text-align: center">
-                            <div  class="btn showHover orangeHover" ng-click="storePlaylist($event, audioPlaylistEnriched)">
-                                <i class="fa fa-download fa-lg "></i>
-                            </div>
-                        </th>
-                    </tr>
-
-                    </thead>
-                    <tbody >
-                    <tr ng-repeat="song in audioPlaylist"
-                        ng-click="play($event, $index, audioPlaylistEnriched)"
-                        ng-class="{ active:  mediaPlayer.currentTrack-1 === $index }">
-
-                        <td class="col-lg-12" >{{song.title}}</td>
-                        <td class="col-lg-1" style="padding: 0 0 0 12px">
-                            <div class="btn showHover  orangeHover" >
-                                <i class="fa fa-linux fa-lg "></i>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!--User Playlists -->
-                <table class="table table-hover" ng-class="{closed: !playlist.isVisible}" ng-if="playlist.playlist != audioPlaylist" ng-repeat="playlist in userPlaylists" >
-                    <thead>
-                    <tr ng-click="togglePlaylist(playlist)">
-                        <th class="col-lg-12">
-                            <div id="input">
-                                <input type="text" ng-model="playlist.name" ng-value="playlist.name"/>
-                            </div>
-                        </th>
-                        <th class="col-lg-1" style="text-align: center">
-                            <div class="btn showHover  orangeHover" ng-click="storePlaylist($event, playlist)">
-                                <i class="fa fa-download fa-lg "></i>
-                            </div>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody  >
-                    <tr ng-repeat="song in playlist.playlist"
-                        ng-click="play($event, $index, playlist)"
-                        ng-class="{ active:  mediaPlayer.currentTrack-1 === $index && audioPlaylist == playlist.playlist }">
-
-                        <td class="col-lg-12">
-                            {{song.title}}
-                        </td>
-                        <td class="col-lg-1" style="padding: 0 0 0 12px">
-                            <div class="btn showHover  orangeHover" ng-click="removeSong($event, $index, playlist)">
-                                <i class="fa fa-times fa-lg "></i>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="btn" ng-click="mediaPlayer.next()">
+                    <i class="fa fa-lg fa-forward"></i>
+                </div>
 
             </div>
         </div>
     </div>
+
 </div>
+
+<!--<div class="playlistWrapper" ng-class="{ 'isPlaylistVisible' : isPlaylistVisible}">-->
+<!--<div class="blockPlaylist" >-->
+<!--<div class="container-fluid">-->
+<!--<div class="table-responsive" >-->
+<!--<table class="table table-hover" ng-class="{closed: !audioPlaylistEnriched.isVisible}" >-->
+<!--<thead>-->
+<!--<tr ng-click="togglePlaylist(audioPlaylistEnriched)">-->
+<!--<th class="col-lg-offset-1 col-lg-12">{{audioPlaylistEnriched.name}} (current Playlist)</th>-->
+
+<!--<th class="col-lg-1" style="text-align: center">-->
+<!--<div  class="btn showHover orangeHover" ng-click="storePlaylist($event, audioPlaylistEnriched)">-->
+<!--<i class="fa fa-download fa-lg "></i>-->
+<!--</div>-->
+<!--</th>-->
+<!--</tr>-->
+
+<!--</thead>-->
+<!--<tbody >-->
+<!--<tr ng-repeat="song in audioPlaylist"-->
+<!--ng-click="play($event, $index, audioPlaylistEnriched)"-->
+<!--ng-class="{ active:  mediaPlayer.currentTrack-1 === $index }">-->
+
+<!--<td class="col-lg-12" >{{song.title}}</td>-->
+<!--<td class="col-lg-1" style="padding: 0 0 0 12px">-->
+<!--<div class="btn showHover  orangeHover" >-->
+<!--<i class="fa fa-linux fa-lg "></i>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+
+<!--&lt;!&ndash;User Playlists &ndash;&gt;-->
+<!--<table class="table table-hover" ng-class="{closed: !playlist.isVisible}" ng-if="playlist.playlist != audioPlaylist" ng-repeat="playlist in userPlaylists" >-->
+<!--<thead>-->
+<!--<tr ng-click="togglePlaylist(playlist)">-->
+<!--<th class="col-lg-12">-->
+<!--<div id="input">-->
+<!--<input type="text" ng-model="playlist.name" ng-value="playlist.name"/>-->
+<!--</div>-->
+<!--</th>-->
+<!--<th class="col-lg-1" style="text-align: center">-->
+<!--<div class="btn showHover  orangeHover" ng-click="storePlaylist($event, playlist)">-->
+<!--<i class="fa fa-download fa-lg "></i>-->
+<!--</div>-->
+<!--</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody  >-->
+<!--<tr ng-repeat="song in playlist.playlist"-->
+<!--ng-click="play($event, $index, playlist)"-->
+<!--ng-class="{ active:  mediaPlayer.currentTrack-1 === $index && audioPlaylist == playlist.playlist }">-->
+
+<!--<td class="col-lg-12">-->
+<!--{{song.title}}-->
+<!--</td>-->
+<!--<td class="col-lg-1" style="padding: 0 0 0 12px">-->
+<!--<div class="btn showHover  orangeHover" ng-click="removeSong($event, $index, playlist)">-->
+<!--<i class="fa fa-times fa-lg "></i>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

@@ -15,9 +15,9 @@
 
     }
 
-    PlayerViewCtrl.$inject = ['$scope', '$rootScope', '$state', 'EventNames', 'Player', 'Socket'];
+    PlayerViewCtrl.$inject = ['$scope', '$rootScope', '$state', 'EventNames', 'Player', 'Socket', '$window'];
 
-    function PlayerViewCtrl($scope, $rootScope, $state, EventNames, Player, Socket) {
+    function PlayerViewCtrl($scope, $rootScope, $state, EventNames, Player, Socket, $window) {
 
         //region Init
         init(this);
@@ -29,7 +29,14 @@
             $scope.isPlaylistVisible = false;
 
             $scope.audioPlaylist.isVisible = true;
-
+            $scope.castAvailable = window.castAvailable;
+            $scope.$watch(
+                function () {
+                    return $window.castAvailable
+                }, function(n,o){
+                    $scope.castAvailable = window.castAvailable;
+                }
+            );
             var localData = JSON.parse(localStorage.getItem('userPlaylists'));
             $scope.userPlaylists = [];
 
@@ -40,6 +47,8 @@
             $scope.add = add;
             $scope.play = play;
             $scope.pause = pause;
+            $scope.launchApp = launchApp;
+
             $scope.togglePlaylistPanel = togglePlaylistPanel;
             $scope.togglePlaylist = togglePlaylist;
             $scope.storePlaylist = storePlaylist;
@@ -53,6 +62,7 @@
 
                 if ($scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1]) {
                     $scope.title = $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].title;
+                    $scope.imgUrl = $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].imgUrl;
                     $scope.parentDirLabel = $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].parentLabel;
                 }
             })
@@ -76,6 +86,65 @@
             };
         }
 
+        //TODO:MOVE on a service
+        //CHROMCAST END
+        function launchApp() {
+            console.log("Launching the Chromecast App...");
+            chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError);
+        }
+
+
+        function onRequestSessionSuccess(e) {
+            console.log("Successfully created session: " + e.sessionId);
+            session = e;
+            loadMedia();
+
+        }
+
+        function loadMedia() {
+            if (!session) {
+                console.log("No session.");
+                return;
+            }
+            if ($scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1]) {
+
+                var mediaInfo = new
+                    chrome.cast.media.MediaInfo('http://78.193.148.177:3010/' + $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].src);
+                mediaInfo.contentType = 'audio/mpeg';
+
+                var request = new chrome.cast.media.LoadRequest(mediaInfo);
+                mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata();
+                mediaInfo.metadata.title = "Title : " + $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].title;
+                mediaInfo.metadata.images = [
+                    new chrome.cast.Image('http://78.193.148.177:3010/' + $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].imgUrl), // ex: http://www.thestation.com/icon.png
+                    new chrome.cast.Image('http://78.193.148.177:3010/' + $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].imgUrl) // fallback
+                ];
+
+                session.loadMedia(request, onLoadSuccess, onLoadError);
+            }
+        }
+
+        function onLoadSuccess(media) {
+            console.log('Successfully loaded media.');
+            console.log('media', media);
+            media.play(null,
+                function (e) {
+                    console.log("%c succes : ", "color:green", e)
+                }, function (e) {
+                    console.log("%cerror : ", "color:red", e)
+                });
+        }
+
+        function onLoadError(e) {
+            console.log("%cerror : ", "color:red", e)
+
+        }
+
+        function onLaunchError() {
+            console.log("Error connecting to the Chromecast.");
+        }
+
+        //CHROMCAST END
         function removeSong(e, index, playlist) {
             e.preventDefault();
             e.stopPropagation();
@@ -126,15 +195,16 @@
                         $scope.mediaPlayer.playPause(index);
 
                     } else {
-                        $scope.mediaPlayer.load();
+                        $scope.mediaPlayer.load($scope.audioPlaylist[index], true);
                         $scope.mediaPlayer.on("canplay", function () {
                             $scope.mediaPlayer.off("canplay");
-                            play(null, index, playlistEnriched);
+                            //play(null, index, playlistEnriched);
 
                         })
                     }
                     if ($scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1]) {
                         $scope.title = $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].title;
+                        $scope.imgUrl = $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].imgUrl;
                         $scope.parentDirLabel = $scope.audioPlaylist[$scope.mediaPlayer.currentTrack - 1].parentLabel;
                     }
                 }

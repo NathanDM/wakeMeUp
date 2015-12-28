@@ -34,7 +34,5 @@ results
 data/*
 public/musique/*
 archives
-template/*
-template
 node_modules
 npm-debug.log

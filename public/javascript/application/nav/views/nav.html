@@ -1,24 +1,24 @@
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" ng-click="togglePreview()"><i class="fa fa-bullhorn"></i> WakeMeUp</a>
+<a href="" id="menu-toggle"></a>
+<a class="logo pull-left" ng-click="togglePreview()"><i class="fa fa-bullhorn"></i> WakeMeUp</a>
 
-    <div class="media-body">
-        <div class="media" id="top-menu">
-            <div class="pull-left tm-icon">
-                <div class="icon-mode">
-                    <i class="fa fa-bullhorn"></i>
-                </div>
-                <input type="checkbox" id="isBroadcaster" ng-model="isBroadcaster" ng-checked="isBroadcaster"/>
-                <label for="isBroadcaster" class="switch">
-                    <div class="slide"></div>
-                </label>
+<div class="media-body">
+    <div class="media" id="top-menu">
+        <div class="pull-left tm-icon">
+            <div class="icon-mode">
+                <i class="fa fa-bullhorn"></i>
             </div>
-            <div class="pull-left tm-icon">
-                <div class="icon-mode">
-                    <i class="fa ear">
-                        <?xml version="1.0" encoding="utf-8"?>
-                        <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-                        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                        <svg width="17px" height="17px"  version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <input type="checkbox" id="isBroadcaster" ng-model="isBroadcaster" ng-checked="isBroadcaster"/>
+            <label for="isBroadcaster" class="switch">
+                <div class="slide"></div>
+            </label>
+        </div>
+        <div class="pull-left tm-icon">
+            <div class="icon-mode">
+                <i class="fa ear">
+                    <?xml version="1.0" encoding="utf-8"?>
+                    <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                    <svg width="17px" height="17px"  version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	   viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path fill="#999" d="M490.594,144.054c-44.403-6.384-91.69-11.008-141.038-13.61L432,48l-32-32L287.721,128.278
 	C277.218,128.094,266.643,128,256,128l0,0L128,0L96,32l97.098,97.098c-60.461,2.121-118.169,7.262-171.693,14.956
@@ -30,60 +30,64 @@
 </svg>
 
 
-                    </i>
-                </div>
-                <input type="checkbox" id="isListener" ng-model="isListener" ng-checked="isListener"/>
-                <label for="isListener" class="switch">
-                    <div class="slide"></div>
-                </label>
+                </i>
             </div>
-            <div class="media-body pull-left">
-                <input type="text" class="main-search" ng-model="$parent.searchSong">
-            </div>
-
-            <div>
-                <div class="dropdown pull-right">
-                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users users-glyph"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li ng-repeat="user in users | reverse | limitTo:quantity">
-                            <a >{{user.name}} <span class="label label-default" ng-class="user.connected ? 'label-success' : 'label-danger'">{{user.connected ? "connected" : "disconnected"}}</span></a>
-                        </li>
-
-                        <li class="divider"></li>
-                        <li>
-                            <a >View All (Soon)</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="useless dropdown pull-right users-status">
-                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" ng-class="{connected : connected}"></i> {{name | uppercase}} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a ><i class="fa fa-fw fa-user" ></i> Profile</a>
-                        </li>
-                        <li>
-                            <a ><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a ><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a ><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="time" class="pull-right">
-                    <span id="hours"></span>
-                    :
-                    <span id="min"></span>
-                    :
-                    <span id="sec"></span>
-                </div>
-            </div>
-            <!--<div class="media-body">-->
-                <!--<input type="text" class="main-search">-->
-            <!--</div>-->
+            <input type="checkbox" id="isListener" ng-model="isListener" ng-checked="isListener"/>
+            <label for="isListener" class="switch">
+                <div class="slide"></div>
+            </label>
         </div>
+        <div class="media-body pull-left">
+            <input type="text" class="main-search" ng-model="$parent.searchSong">
+        </div>
+
+        <div>
+            <div class="dropdown pull-right">
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users users-glyph"></i> <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu alert-dropdown">
+                    <li ng-repeat="user in users | reverse | limitTo:quantity">
+                        <a>{{user.name}} <span class="label label-default"
+                                               ng-class="user.connected ? 'label-success' : 'label-danger'">{{user.connected ? "connected" : "disconnected"}}</span></a>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <a>View All (Soon)</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="useless dropdown pull-right users-status">
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"
+                                                                     ng-class="{connected : connected}"></i> {{name |
+                    uppercase}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="time" class="pull-right">
+                <span id="hours"></span>
+                :
+                <span id="min"></span>
+                :
+                <span id="sec"></span>
+            </div>
+        </div>
+        <!--<div class="media-body">-->
+        <!--<input type="text" class="main-search">-->
+        <!--</div>-->
     </div>
+</div>
 

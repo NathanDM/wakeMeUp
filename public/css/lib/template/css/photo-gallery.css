@@ -1,13 +1,13 @@
 .photo-gallery {
     padding: 7px;
-    text-align: center;
+    /*text-align: center;*/
     font-size: 0;
 }
 .superbox-list {
     display: inline-block;
-    padding: 6px;
-    min-height: 150px;
-    
+    /*padding: 6px;*/
+    /*min-height: 150px;*/
+
 }
 
 .superbox-img {
@@ -70,17 +70,17 @@
 }
 @media only screen and (min-width: 486px) {
 	.superbox-list {
-		width:25%;
+		width:33%;
 	}
 }
 @media only screen and (min-width: 768px) {
 	.superbox-list {
-		width:16.66666667%;
+		width:24.666667%;
 	}
 }
 @media only screen and (min-width: 1025px) {
 	.superbox-list {
-	    width:12.48%;
+	    width:16.48%;
             
 	}
 }

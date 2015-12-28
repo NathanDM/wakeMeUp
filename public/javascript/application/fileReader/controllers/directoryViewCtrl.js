@@ -96,6 +96,12 @@ angular
 
         function updateDir(data) {
             $scope.directories = data.files;
+
+            $.each(data.files, function (i, file) {
+                if (!file.imgUrl && !file.containSong) {
+                    file.imgUrl = data.imgUrl;
+                }
+            })
             $scope.curDir = data;
 
             if ($scope.curDir.containSong) {

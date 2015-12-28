@@ -26,6 +26,10 @@ angular
             var param = {dir: dir};
 
             return HttpUtil.request('POST', urlToRequest, param);
+            //var urlToRequest = "admin/read?file=" + dir;
+            //var param = {dir: dir};
+            //
+            //return HttpUtil.request('GET', urlToRequest, param);
         }
 
 

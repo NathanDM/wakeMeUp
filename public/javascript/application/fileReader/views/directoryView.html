@@ -1,73 +1,77 @@
+
 <div class="content-wrapper">
     <div ng-class="{'slideRight' : player.isPlaylistVisible}">
-    <ol class="breadcrumb hidden-xs">
-        <li><a ng-click="onClickDir(curDir.parent)">{{curDir.parent}}</a></li>
-        <li class="active">Data</li>
-    </ol>
 
-    <h4 class="page-title" ng-click="onClickDir(curDir.parent)">{{curDir.src | uppercase}}</h4>
+        <h4 class="page-title" ng-click="onClickDir(curDir.parent)"><a ng-click="onClickDir(curDir.parent)">Previous</a></h4>
 
-    <!--</div>-->
-    <!--</div>-->
-    <div class="block-area">
-        <div class="photo-gallery tile clearfix">
-            <div class="superbox-list" ng-if="dire.dir" ng-repeat="dire in directories" ng-click="onClickDir(dire.src)">
-                <div class="dummy"></div>
-                <img ng-if="dire.imgUrl" ng-src="{{dire.imgUrl}}" >
-                <alain ng-if="!dire.imgUrl" svg-width="100%" svg-height="100%" style="top:0; bottom: 0; left:0; right:0" ></alain>
-                <div class="superbox-info">
-                    <h4 class="m-t-20" data-rel="history">
-                        {{dire.name}}
-                    </h4>
-                    <p class="m-b-20" ng-if="dir.containSong">{{dire.files.length}} Songs</p>
-                    <p class="m-b-20" ng-if="!dir.containSong">{{dire.files.length}} Albums</p>
+        <div class="block-area-wrapper">
+            <div class="block-area">
+                <div class="photo-gallery tile clearfix">
+                    <div class="superbox-list" ng-if="dire.dir" ng-repeat="dire in directories"
+                         ng-click="onClickDir(dire.src)">
+                        <div class="dummy"></div>
+                        <img ng-if="dire.imgUrl" ng-src="{{dire.imgUrl}}">
+                        <alain ng-if="!dire.imgUrl" svg-width="100%" svg-height="100%"
+                               style="top:0; bottom: 0; left:0; right:0"></alain>
+                        <div class="superbox-info">
+                            <p class="m-t-20" data-rel="history">
+                                {{dire.name}}
+                            </p>
+
+                            <p class="m-b-20" ng-if="dire.containSong">{{dire.files.length}} Songs</p>
+
+                            <p class="m-b-20" ng-if="!dire.containSong">{{dire.files.length}} Albums</p>
+                        </div>
+                    </div>
+
+                    <div class="dirPlaylist table-responsive" ng-if="curDir.containSong">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <!--<th></th>-->
+                                <th>Song</th>
+                                <th>Album</th>
+                                <th>time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="song in directories | filter:{dir:false}"
+                                ng-click="onClickSong($index)"
+                                ng-class="active"
+                                    >
+
+                                <td class="col-lg-1  " style="width:0.1%"
+                                    ng-if="!(player.currentTrack-1 == $index && audioPlaylist.name == localPlaylist.name)">
+                                    <img ng-src="{{curDir.imgUrl}}" style="height:auto; width:40px"/>
+                                </td>
+                                <td class="col-lg-1 " style="width:0.1%"
+                                    ng-if="player.currentTrack-1 === $index && audioPlaylist.name === localPlaylist.name">
+                                    <div style="height:40px; width:40px; padding: 9px;"
+                                         >
+                                        <i ng-class="{'fa fa-2x fa-play' : player.playing, 'fa fa-2x fa-pause' : !player.playing }"></i>
+                                    </div>
+                                </td>
+
+                                <!--<td class="col-lg-1 blockHover orangeHover" style="width:0.1%">-->
+                                    <!--<div style="height:40px; width:40px; padding: 9px;"-->
+                                         <!--ng-click="addToPlaylist($event, song)">-->
+                                        <!--<i class="fa fa-plus-square-o fa-2x "></i>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+
+                                <!--<td class="col-lg-1 " style="width:0.1%" ng-if="player.currentTrack-1 === $index && audioPlaylist.name === localPlaylist.name"><i class="fa " ng-class="{'fa-play' : player.playing, 'fa-pause' : !player.playing }"></i> </td>-->
+                                <!--<td class="col-lg-1" style="width:0.1%" ng-if="(player.currentTrack-1 !== $index && audioPlaylist.name === localPlaylist.name) || audioPlaylist.name !=localPlaylist.name">{{$index + 1}}</td>-->
+                                <td class="col-lg-6">{{song.title}}</td>
+                                <td class="col-lg-6">{{song.parentLabel}}</td>
+                                <td class="col-lg-1">{{song.duration}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <div class="dirPlaylist table-responsive" ng-if="curDir.containSong">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <!--<th></th>-->
-                        <th>Song</th>
-                        <th>Album</th>
-                        <th>time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="song in directories | filter:{dir:false}"
-                        ng-click="onClickSong($index)"
-                        ng-class="{ active:  player.currentTrack-1 === $index }"
-                            >
-
-                        <td class="col-lg-1 noneHover " style="width:0.1%" ng-if="!(player.currentTrack-1 === $index && audioPlaylist.name === localPlaylist.name)">
-                            <img ng-src="{{curDir.imgUrl}}" style="height:auto; width:40px"/>
-                        </td>
-                        <td class="col-lg-1 noneHover " style="width:0.1%" ng-if="player.currentTrack-1 === $index && audioPlaylist.name === localPlaylist.name">
-                            <div style="height:40px; width:40px; padding: 9px;" ng-click="addToPlaylist($event, song)">
-                                <i class="fa fa-2x" ng-class="{'fa-play' : player.playing, 'fa-pause' : !player.playing }"></i>
-                            </div>
-                        </td>
-
-                        <td class="col-lg-1 blockHover orangeHover" style="width:0.1%">
-                            <div style="height:40px; width:40px; padding: 9px;" ng-click="addToPlaylist($event, song)">
-                                <i class="fa fa-plus-square-o fa-2x "></i>
-                            </div>
-                        </td>
-
-                        <!--<td class="col-lg-1 " style="width:0.1%" ng-if="player.currentTrack-1 === $index && audioPlaylist.name === localPlaylist.name"><i class="fa " ng-class="{'fa-play' : player.playing, 'fa-pause' : !player.playing }"></i> </td>-->
-                        <!--<td class="col-lg-1" style="width:0.1%" ng-if="(player.currentTrack-1 !== $index && audioPlaylist.name === localPlaylist.name) || audioPlaylist.name !=localPlaylist.name">{{$index + 1}}</td>-->
-                        <td class="col-lg-6">{{song.title}}</td>
-                        <td class="col-lg-6">{{song.parentLabel}}</td>
-                        <td class="col-lg-1">{{song.duration}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
-    <!-- /.container-fluid -->
     </div>
 </div>
 
